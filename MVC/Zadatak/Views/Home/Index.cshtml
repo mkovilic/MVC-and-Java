@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Početna";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<div id="mainDisplay">
+    <div class="element">
+        @*<input type="button" id="displayVozaciBtn" value="Vozaci" class="btn btn-dark" />*@
+        <input type="image" id="displayVozaciBtn" src="~/Content/Icons/driver.png" alt="Submit" width="48" height="48">
+    </div>
+    <div class="element">
+        <input type="image" id="displayPutniNalogBtn" src="~/Content/Icons/news.png" alt="Submit" width="48" height="48" />
+    </div>
+    <div class="element">
+        <input type="image" id="displayVozilaBtn" src="~/Content/Icons/car.png" alt="Submit" width="48" height="48"/>
+    </div>
+    <div class="element">
+        <input type="image" id="displayPostavkeBtn" src="~/Content/Icons/su.png" alt="Submit" width="48" height="48" />
+    </div>
+</div>
+<hr />
+<div id="displayOptions">
+    <div id="displayVozaci" style="display:none">
+        <a href="@Url.Action("Create", "Vozac")">Dodaj vozača</a>
+        <a href="@Url.Action("Index", "Vozac")">Pregled</a>
+    </div>
+
+    <div id="displayPutniNalog" style="display:none">
+        <a href="@Url.Action("Create", "PutniNalog")">Dodaj putni nalog</a>
+        <a href="@Url.Action("Index", "PutniNalog")">Pregled</a>
+    </div>
+    <div id="displayVozila" style="display:none">
+        <a href="@Url.Action("Create", "Vozilo")">Dodaj vozilo</a>
+        <a href="@Url.Action("Index","Vozilo")">Pregled</a>
+
+    </div>
+    <div id="displayPostavke" style="display:none">
+        <a href="@Url.Action("Backup", "Postavke")">Izradi backup baze</a>
+        <a href="@Url.Action("Povrati","Postavke")">Povrat baze</a>
+    </div>
+</div>

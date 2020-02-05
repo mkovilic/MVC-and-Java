@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Backup";
+}
+
+<h2>Backup</h2>
+
+@using (Html.BeginForm("Backup", "Postavke", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Hidden("type", 1)
+    <input type="submit" value="Backup" class="btn btn-primary">
+
+}
+@Html.Partial("~/Views/Shared/_Navigation.cshtml")
