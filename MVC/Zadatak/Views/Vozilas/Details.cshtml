@@ -1,0 +1,113 @@
+﻿@model Zadatak.Models.Database.Vozila
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vozila</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+
+            @Html.DisplayNameFor(model => model.IDVozilo)
+        </dt>
+
+        <dd id="idVozilo">
+            @Html.DisplayFor(model => model.IDVozilo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GodinaProizvodnje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StanjeKilometra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StanjeKilometra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GodinaProizvodnje)
+        </dd>
+        <dt>
+            Popis servisa za ovo vozilo
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Datum</th>
+                    <th>Kategorija servisa</th>
+                    <th>Cijena</th>
+                </tr>
+
+                @foreach (var servis in ViewBag.Servisi)
+                {
+                    <tr>
+                        <td>@servis.Datum</td>
+                        <td>@servis.KategorijaServi.Naziv</td>
+                        <td>@servis.Cijena kn</td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<input type="button" , class="btn btn-primary" id="btnIzvjestaj" value="Izradi izvještaj" />
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDVozilo }) |
+    @Html.Partial("~/Views/Shared/_Navigation.cshtml")
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@section Scripts {
+    <script type="text/javascript">$(function () {
+
+            $('#btnIzvjestaj').click(function () {
+                var idVozilo = $('#idVozilo').text().replace(/\s/g, "");
+
+                $.ajax({
+                    url: "/Moj/ExportVozilo",
+                    method: "GET",
+                    data: { idVozilo: idVozilo },
+                    success: () => {
+                        window.location = '/Moj/ExportVozilo?idVozilo=' + idVozilo;
+                    },
+                    fail: () => {
+                        alert('Error has occured.');
+                    }
+                });
+                //console.log(searchQuery);
+            });
+
+            $('#btnReset').click(function () {
+                $.ajax({
+                    url: "http://localhost:56803/Moj/Filter",
+                    method: "GET",
+                    success: (data) => {
+                        $('.table').html(data);
+                        $('#tbFilterText').val('');
+                    }
+                });
+            })
+        });</script>
+
+}

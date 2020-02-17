@@ -1,4 +1,4 @@
-namespace Zadatak.Models
+Ôªønamespace Zadatak.Models
 {
     using System.ComponentModel.DataAnnotations;
     using System.Xml.Serialization;
@@ -28,9 +28,9 @@ namespace Zadatak.Models
         public string Mobitel { get; set; }
 
         [StringLength(15)]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "VozaËka dozvola sadrûi samo brojke")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Vozaƒçka dozvola sadr≈æi samo brojke")]
         [Required(ErrorMessage = "Ovo polje je obavezno")]
-        [Display(Name = "VozaËka dozvola")]
+        [Display(Name = "Vozaƒçka dozvola")]
         [XmlElement("vozackaDozvola")]
         public string VozackaDozvola { get; set; }
 

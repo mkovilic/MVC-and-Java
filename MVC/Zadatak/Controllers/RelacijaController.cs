@@ -121,6 +121,8 @@ namespace Zadatak.Controllers
             {
                 ListaGradova = gradRepository.List(),
                 ListaVozaca = vozacRepository.List(),
+                ListaDrzava = drzavaRepository.List(),
+                ListaPutnihNaloga = putniNalogRepository.List(),
                 GradPolazakID = relacija.GradPolazakID,
                 GradDolazakID = relacija.GradDolazakID,
                 PutniNalogID = relacija.PutniNalogID,
@@ -129,6 +131,11 @@ namespace Zadatak.Controllers
                 IDRelacija = relacija.IDRelacija.Value
 
             };
+            foreach (var nalog in model.ListaPutnihNaloga)
+            {
+                nalog.Vozac = vozacRepository.GetById(nalog.VozacID);
+
+            }
             //ViewBag.VozacID = new SelectList(Models.SqlHandler.GetVozaci(), "IDVozac", "FirstName", putniNalog.VozacID);
             // ViewBag.VoziloID = new SelectList(Models.SqlHandler.GetVozila(), "IDVozilo", "FirstName", putniNalog.VozacID);
             return View(model);

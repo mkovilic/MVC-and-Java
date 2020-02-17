@@ -40,7 +40,7 @@ namespace Zadatak.Models.Database
                 {
                     cmd.CommandText = "DeleteGrad";
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@IDPutniNalog", idGrad);
+                    cmd.Parameters.AddWithValue("@IDGrad", idGrad);
 
                     return cmd.ExecuteNonQuery();
 

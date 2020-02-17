@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Zadatak.Models.Database.Servi>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cijena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Datum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KategorijaServi.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vozila.Tip)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cijena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KategorijaServi.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vozila.Tip)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDServis }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDServis }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDServis })
+            </td>
+        </tr>
+    }
+    @Html.ActionLink("Back to List", "Index","Vozilas")
+
+</table>

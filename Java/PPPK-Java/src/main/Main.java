@@ -14,10 +14,10 @@ import model.Driver;
 
 
 public class Main {
-    private static final String DRIVERS_PATH = "F:\\Downloads\\PPPK-Java\\src\\main\\drivers.csv";
+    private static final String DRIVERS_PATH = "F:\\Documents\\Projektonž\\MVC-and-Java\\Java\\PPPK-Java\\src\\main\\drivers.csv";
     private static final String DRIVERS_INSERT = "INSERT INTO Vozac VALUES (?, ?, ?, ?)";
     
-    private static final String CARS_PATH = "F:\\Downloads\\PPPK-Java\\src\\main\\cars.csv";
+    private static final String CARS_PATH = "F:\\Documents\\Projektonž\\MVC-and-Java\\Java\\PPPK-Java\\src\\main\\cars.csv";
     private static final String CARS_INSERT = "INSERT INTO Vozilo VALUES (?, ?, ?, ?)";
     
     public static void main(String[] args) throws IOException {

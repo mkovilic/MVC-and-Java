@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PPPKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="KategorijaServis">
+          <Key>
+            <PropertyRef Name="IDKategorijaServis" />
+          </Key>
+          <Property Name="IDKategorijaServis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Servis">
+          <Key>
+            <PropertyRef Name="IDServis" />
+          </Key>
+          <Property Name="IDServis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoziloID" Type="int" />
+          <Property Name="Cijena" Type="float" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="200" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="KategorijaServisID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vozila">
+          <Key>
+            <PropertyRef Name="IDVozilo" />
+          </Key>
+          <Property Name="IDVozilo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tip" Type="nvarchar" MaxLength="30" />
+          <Property Name="Marka" Type="nvarchar" MaxLength="30" />
+          <Property Name="StanjeKilometra" Type="int" />
+          <Property Name="GodinaProizvodnje" Type="int" />
+        </EntityType>
+        <Association Name="FK_ServisKategorija">
+          <End Role="KategorijaServis" Type="Self.KategorijaServis" Multiplicity="1" />
+          <End Role="Servis" Type="Self.Servis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KategorijaServis">
+              <PropertyRef Name="IDKategorijaServis" />
+            </Principal>
+            <Dependent Role="Servis">
+              <PropertyRef Name="KategorijaServisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServisVozilo">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1" />
+          <End Role="Servis" Type="Self.Servis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="IDVozilo" />
+            </Principal>
+            <Dependent Role="Servis">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddServis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDServis" Type="int" Mode="In" />
+          <Parameter Name="VoziloID" Type="int" Mode="In" />
+          <Parameter Name="Cijena" Type="float" Mode="In" />
+          <Parameter Name="Opis" Type="nvarchar" Mode="In" />
+          <Parameter Name="Datum" Type="datetime" Mode="In" />
+          <Parameter Name="KategorijaServisID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddVozilo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDVozilo" Type="int" Mode="In" />
+          <Parameter Name="Tip" Type="nvarchar" Mode="In" />
+          <Parameter Name="Marka" Type="nvarchar" Mode="In" />
+          <Parameter Name="GodinaProizvodnje" Type="int" Mode="In" />
+          <Parameter Name="StanjeKilometra" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteServis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDServis" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteVozilo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDVozilo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetKategorijeTroskova" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetServis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDServis" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetServisi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetVozila" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetVozilo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDVozilo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateServis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDServis" Type="int" Mode="In" />
+          <Parameter Name="VoziloID" Type="int" Mode="In" />
+          <Parameter Name="Cijena" Type="float" Mode="In" />
+          <Parameter Name="Opis" Type="nvarchar" Mode="In" />
+          <Parameter Name="Datum" Type="datetime" Mode="In" />
+          <Parameter Name="KategorijaServisID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateVozilo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDVozilo" Type="int" Mode="In" />
+          <Parameter Name="Tip" Type="nvarchar" Mode="In" />
+          <Parameter Name="Marka" Type="nvarchar" Mode="In" />
+          <Parameter Name="GodinaProizvodnje" Type="int" Mode="In" />
+          <Parameter Name="StanjeKilometra" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="PPPKModelStoreContainer">
+          <EntitySet Name="KategorijaServis" EntityType="Self.KategorijaServis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servis" EntityType="Self.Servis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vozila" EntityType="Self.Vozila" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ServisKategorija" Association="Self.FK_ServisKategorija">
+            <End Role="KategorijaServis" EntitySet="KategorijaServis" />
+            <End Role="Servis" EntitySet="Servis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServisVozilo" Association="Self.FK_ServisVozilo">
+            <End Role="Vozila" EntitySet="Vozila" />
+            <End Role="Servis" EntitySet="Servis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PPPKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="KategorijaServi">
+          <Key>
+            <PropertyRef Name="IDKategorijaServis" />
+          </Key>
+          <Property Name="IDKategorijaServis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Servis" Relationship="Self.FK_ServisKategorija" FromRole="KategorijaServis" ToRole="Servis" />
+        </EntityType>
+        <EntityType Name="Servi">
+          <Key>
+            <PropertyRef Name="IDServis" />
+          </Key>
+          <Property Name="IDServis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoziloID" Type="Int32" />
+          <Property Name="Cijena" Type="Double" />
+          <Property Name="Opis" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Datum" Type="DateTime" Precision="0" />
+          <Property Name="KategorijaServisID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KategorijaServi" Relationship="Self.FK_ServisKategorija" FromRole="Servis" ToRole="KategorijaServis" />
+          <NavigationProperty Name="Vozila" Relationship="Self.FK_ServisVozilo" FromRole="Servis" ToRole="Vozila" />
+        </EntityType>
+        <EntityType Name="Vozila">
+          <Key>
+            <PropertyRef Name="IDVozilo" />
+          </Key>
+          <Property Name="IDVozilo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tip" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Marka" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="StanjeKilometra" Type="Int32" />
+          <Property Name="GodinaProizvodnje" Type="Int32" />
+          <NavigationProperty Name="Servis" Relationship="Self.FK_ServisVozilo" FromRole="Vozila" ToRole="Servis" />
+        </EntityType>
+        <Association Name="FK_ServisKategorija">
+          <End Role="KategorijaServis" Type="Self.KategorijaServi" Multiplicity="1" />
+          <End Role="Servis" Type="Self.Servi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KategorijaServis">
+              <PropertyRef Name="IDKategorijaServis" />
+            </Principal>
+            <Dependent Role="Servis">
+              <PropertyRef Name="KategorijaServisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServisVozilo">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1" />
+          <End Role="Servis" Type="Self.Servi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="IDVozilo" />
+            </Principal>
+            <Dependent Role="Servis">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PPPKEntities5" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KategorijaServis" EntityType="Self.KategorijaServi" />
+          <EntitySet Name="Servis" EntityType="Self.Servi" />
+          <EntitySet Name="Vozilas" EntityType="Self.Vozila" />
+          <AssociationSet Name="FK_ServisKategorija" Association="Self.FK_ServisKategorija">
+            <End Role="KategorijaServis" EntitySet="KategorijaServis" />
+            <End Role="Servis" EntitySet="Servis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServisVozilo" Association="Self.FK_ServisVozilo">
+            <End Role="Vozila" EntitySet="Vozilas" />
+            <End Role="Servis" EntitySet="Servis" />
+          </AssociationSet>
+          <FunctionImport Name="AddServis" EntitySet="Servis" ReturnType="Collection(PPPKModel.Servi)">
+            <Parameter Name="IDServis" Mode="In" Type="Int32" />
+            <Parameter Name="VoziloID" Mode="In" Type="Int32" />
+            <Parameter Name="Cijena" Mode="In" Type="Double" />
+            <Parameter Name="Opis" Mode="In" Type="String" />
+            <Parameter Name="Datum" Mode="In" Type="DateTime" />
+            <Parameter Name="KategorijaServisID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteServis" EntitySet="Servis" ReturnType="Collection(PPPKModel.Servi)">
+          <Parameter Name="IDServis" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetKategorijeTroskova" EntitySet="KategorijaServis" ReturnType="Collection(PPPKModel.KategorijaServi)" />
+          <FunctionImport Name="GetServis" EntitySet="Servis" ReturnType="Collection(PPPKModel.Servi)">
+          <Parameter Name="IDServis" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetServisi" EntitySet="Servis" ReturnType="Collection(PPPKModel.Servi)" />
+          <FunctionImport Name="GetVozila" EntitySet="Vozilas" ReturnType="Collection(PPPKModel.Vozila)" />
+          <FunctionImport Name="UpdateServis" EntitySet="Servis" ReturnType="Collection(PPPKModel.Servi)">
+            <Parameter Name="IDServis" Mode="In" Type="Int32" />
+            <Parameter Name="VoziloID" Mode="In" Type="Int32" />
+            <Parameter Name="Cijena" Mode="In" Type="Double" />
+            <Parameter Name="Opis" Mode="In" Type="String" />
+            <Parameter Name="Datum" Mode="In" Type="DateTime" />
+            <Parameter Name="KategorijaServisID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddVozilo" EntitySet="Vozilas" ReturnType="Collection(PPPKModel.Vozila)">
+            <Parameter Name="IDVozilo" Mode="In" Type="Int32" />
+            <Parameter Name="Tip" Mode="In" Type="String" />
+            <Parameter Name="Marka" Mode="In" Type="String" />
+            <Parameter Name="GodinaProizvodnje" Mode="In" Type="Int32" />
+            <Parameter Name="StanjeKilometra" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteVozilo" EntitySet="Vozilas" ReturnType="Collection(PPPKModel.Vozila)">
+            <Parameter Name="IDVozilo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetVozilo" EntitySet="Vozilas" ReturnType="Collection(PPPKModel.Vozila)">
+            <Parameter Name="IDVozilo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateVozilo" EntitySet="Vozilas" ReturnType="Collection(PPPKModel.Vozila)">
+            <Parameter Name="IDVozilo" Mode="In" Type="Int32" />
+            <Parameter Name="Tip" Mode="In" Type="String" />
+            <Parameter Name="Marka" Mode="In" Type="String" />
+            <Parameter Name="GodinaProizvodnje" Mode="In" Type="Int32" />
+            <Parameter Name="StanjeKilometra" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetKategorijeTroskova_Result">
+          <Property Type="Int32" Name="IDKategorijaTrosak" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GetServis_Result">
+          <Property Type="Int32" Name="IDServis" Nullable="false" />
+          <Property Type="Int32" Name="VoziloID" Nullable="true" />
+          <Property Type="Double" Name="Cijena" Nullable="true" />
+          <Property Type="String" Name="Opis" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Datum" Nullable="true" />
+          <Property Type="Int32" Name="KategorijaServisID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetServisi_Result">
+          <Property Type="Int32" Name="IDServis" Nullable="false" />
+          <Property Type="Int32" Name="VoziloID" Nullable="true" />
+          <Property Type="Double" Name="Cijena" Nullable="true" />
+          <Property Type="String" Name="Opis" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Datum" Nullable="true" />
+          <Property Type="Int32" Name="KategorijaServisID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetVozila_Result">
+          <Property Type="Int32" Name="IDVozilo" Nullable="false" />
+          <Property Type="String" Name="Tip" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Marka" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="StanjeKilometra" Nullable="true" />
+          <Property Type="Int32" Name="GodinaProizvodnje" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetVozilo_Result">
+          <Property Type="Int32" Name="IDVozilo" Nullable="false" />
+          <Property Type="String" Name="Tip" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Marka" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="StanjeKilometra" Nullable="true" />
+          <Property Type="Int32" Name="GodinaProizvodnje" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PPPKModelStoreContainer" CdmEntityContainer="PPPKEntities5">
+          <EntitySetMapping Name="KategorijaServis">
+            <EntityTypeMapping TypeName="PPPKModel.KategorijaServi">
+              <MappingFragment StoreEntitySet="KategorijaServis">
+                <ScalarProperty Name="IDKategorijaServis" ColumnName="IDKategorijaServis" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servis">
+            <EntityTypeMapping TypeName="PPPKModel.Servi">
+              <MappingFragment StoreEntitySet="Servis">
+                <ScalarProperty Name="IDServis" ColumnName="IDServis" />
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="KategorijaServisID" ColumnName="KategorijaServisID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vozilas">
+            <EntityTypeMapping TypeName="PPPKModel.Vozila">
+              <MappingFragment StoreEntitySet="Vozila">
+                <ScalarProperty Name="IDVozilo" ColumnName="IDVozilo" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="StanjeKilometra" ColumnName="StanjeKilometra" />
+                <ScalarProperty Name="GodinaProizvodnje" ColumnName="GodinaProizvodnje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddServis" FunctionName="PPPKModel.Store.AddServis" />
+          <FunctionImportMapping FunctionImportName="DeleteServis" FunctionName="PPPKModel.Store.DeleteServis" />
+          <FunctionImportMapping FunctionImportName="GetKategorijeTroskova" FunctionName="PPPKModel.Store.GetKategorijeTroskova">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetServis" FunctionName="PPPKModel.Store.GetServis">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetServisi" FunctionName="PPPKModel.Store.GetServisi">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetVozila" FunctionName="PPPKModel.Store.GetVozila">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateServis" FunctionName="PPPKModel.Store.UpdateServis" />
+          <FunctionImportMapping FunctionImportName="AddVozilo" FunctionName="PPPKModel.Store.AddVozilo" />
+          <FunctionImportMapping FunctionImportName="DeleteVozilo" FunctionName="PPPKModel.Store.DeleteVozilo" />
+          <FunctionImportMapping FunctionImportName="GetVozilo" FunctionName="PPPKModel.Store.GetVozilo">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateVozilo" FunctionName="PPPKModel.Store.UpdateVozilo" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

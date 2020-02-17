@@ -99,7 +99,7 @@ public class PDFHelper {
             contentStream.close();
 
 // Save the results and ensure that the document is properly closed:
-            doc.save("F:\\Downloads\\PPPKjava\\src\\PutniNalog.pdf");
+            doc.save("F:\\Documents\\Projektonž\\MVC-and-Java\\Java\\PPPKjava\\src\\PutniNalog.pdf");
             doc.close();
             System.out.println("PDF Created Done.");
 

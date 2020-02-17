@@ -25,7 +25,7 @@ namespace Zadatak.Controllers
         IRepository<KategorijaTroska> kategorijaTrosakRepository = new KategorijaTrosakRepository();
         IRepository<Servis> servisRepository = new ServisRepository();
         IRepository<KategorijaServis> kategorijaServisRepository = new KategorijaServisRepository();
-
+        private PPPKEntities5 db = new PPPKEntities5();
         // GET: Moj
         public ActionResult Index()
         {
@@ -140,8 +140,9 @@ namespace Zadatak.Controllers
 
         public FileResult ExportVozilo(int idVozilo)
         {
-            Vozilo vozilo = voziloRepository.GetById(idVozilo);
-            IEnumerable<Servis> servisi = servisRepository.List().Where(servis => servis.VoziloID == idVozilo);
+            // Vozilo vozilo = voziloRepository.GetById(idVozilo);
+            Vozila vozilo = db.GetVozilo(idVozilo).FirstOrDefault();
+            IEnumerable<Servi> servisi = db.GetServisi().Where(servis => servis.VoziloID == idVozilo).ToList();
             if(vozilo != null)
             {
                 StringWriter stringWriter = new StringWriter();
@@ -157,11 +158,19 @@ namespace Zadatak.Controllers
 
 
                     writer.RenderBeginTag(HtmlTextWriterTag.P);
-                    writer.Write("Vozilo: " + vozilo.PunoIme);
+                    writer.Write("Vozilo: " + vozilo.Marka);
+                    writer.RenderEndTag();
+
+                    writer.RenderBeginTag(HtmlTextWriterTag.P);
+                    writer.Write("Tip: " + vozilo.Tip);
                     writer.RenderEndTag();
 
                     writer.RenderBeginTag(HtmlTextWriterTag.P);
                     writer.Write("Kilometri: " + vozilo.StanjeKilometra);
+                    writer.RenderEndTag();
+
+                    writer.RenderBeginTag(HtmlTextWriterTag.P);
+                    writer.Write("Godina proizvodnje: " + vozilo.GodinaProizvodnje);
                     writer.RenderEndTag();
 
                     writer.RenderBeginTag(HtmlTextWriterTag.P);
@@ -190,7 +199,7 @@ namespace Zadatak.Controllers
 
                         writer.RenderBeginTag(HtmlTextWriterTag.Tbody);
 
-                        foreach (var servis in servisi)
+                        foreach (var servis in servisi.ToList())
                         {
                             writer.RenderBeginTag(HtmlTextWriterTag.Tr);
 
@@ -200,7 +209,7 @@ namespace Zadatak.Controllers
                             writer.RenderEndTag();
 
                             writer.RenderBeginTag(HtmlTextWriterTag.Td);
-                            writer.Write(servis.KategorijaServis.Naziv);
+                            writer.Write(servis.KategorijaServi.Naziv);
                             writer.RenderEndTag();
 
                             writer.RenderBeginTag(HtmlTextWriterTag.Td);
@@ -324,46 +333,55 @@ namespace Zadatak.Controllers
                             //insert drzava
                             foreach (Drzava drzava in m.Drzave)
                             {
+                                drzavaRepository.Delete(drzava.IDDrzava);
                                 drzavaRepository.Add(drzava);
                             }
                             //insert gradova
                             foreach (Grad grad in m.Gradovi)
                             {
+                                gradRepository.Delete(grad.IDGrad);
                                 gradRepository.Add(grad);
                             }
                             //insert vozaca
                             foreach (Vozac vozac in m.Vozaci)
                             {
+                                vozacRepository.Delete(vozac.IDVozac);
                                 vozacRepository.Add(vozac);
                             }
                             //insert vozila
                             foreach (Vozilo vozilo in m.Vozila)
                             {
+                                voziloRepository.Delete(vozilo.IDVozilo);
                                 voziloRepository.Add(vozilo);
                             }
                             //insert putnog naloga
                             foreach (PutniNalog nalog in m.PutniNalozi)
                             {
+                                putniNalogRepository.Delete(nalog.IDPutniNalog);
                                 putniNalogRepository.Add(nalog);
                             }
                             //insert relacije
                             foreach (Relacija relacija in m.Relacije)
                             {
+                                relacijaRepository.Delete(relacija.IDRelacija);
                                 relacijaRepository.Add(relacija);
                             }
                             //insert kategorija troskova
                             foreach (KategorijaTroska kategorija in m.KategorijeTroskova)
                             {
+                                kategorijaTrosakRepository.Delete(kategorija.IDKategorijaTrosak);
                                 kategorijaTrosakRepository.Add(kategorija);
                             }
                             // insert kategorija servisa
                             foreach (KategorijaServis kategorijaServis in m.KategorijeServisa)
                             {
+                                kategorijaServisRepository.Delete(kategorijaServis.IDKategorijaServis);
                                 kategorijaServisRepository.Add(kategorijaServis);
                             }
                             //insert servisa
                             foreach (Servis servis in m.Servisi)
                             {
+                                servisRepository.Delete(servis.IDServis);
                                 servisRepository.Add(servis);
                             }
                         }

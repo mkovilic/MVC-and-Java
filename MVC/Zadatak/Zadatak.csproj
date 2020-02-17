@@ -190,22 +190,64 @@
     <Compile Include="Controllers\PostavkeController.cs" />
     <Compile Include="Controllers\PutniNalogController.cs" />
     <Compile Include="Controllers\RelacijaController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\Servis1Controller.cs" />
     <Compile Include="Controllers\ServisController.cs" />
     <Compile Include="Controllers\VozacController.cs" />
+    <Compile Include="Controllers\VozilasController.cs" />
     <Compile Include="Controllers\VoziloController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BackupModel.cs" />
     <Compile Include="Models\Database\DrzavaRepository.cs" />
+    <Compile Include="Models\Database\GetKategorijeTroskova_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\GetServisi_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\GetServis_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\GetVozila_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\GetVozilo_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\GradRepository.cs" />
     <Compile Include="Models\Database\IRepository.cs" />
+    <Compile Include="Models\Database\KategorijaServi.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\KategorijaServisRepository.cs" />
     <Compile Include="Models\Database\KategorijaTrosakRepository.cs" />
+    <Compile Include="Models\Database\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\PutniNalogRepository.cs" />
     <Compile Include="Models\Database\RelacijeRepository.cs" />
+    <Compile Include="Models\Database\Servi.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\ServisRepository.cs" />
     <Compile Include="Models\Database\VozacRepository.cs" />
+    <Compile Include="Models\Database\Vozila.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\VoziloRepository.cs" />
     <Compile Include="Models\Drzava.cs" />
     <Compile Include="Models\Grad.cs" />
@@ -239,6 +281,16 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Models\Database\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Database\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -262,6 +314,13 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <EntityDeploy Include="Models\Database\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Database\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -356,6 +415,17 @@
     <Content Include="Views\Vozilo\Edit.cshtml" />
     <Content Include="Views\Vozilo\Delete.cshtml" />
     <Content Include="Views\Relacija\Edit.cshtml" />
+    <Content Include="Views\Service\Create.cshtml" />
+    <Content Include="Views\Servis1\Create.cshtml" />
+    <Content Include="Views\Servis1\Delete.cshtml" />
+    <Content Include="Views\Servis1\Details.cshtml" />
+    <Content Include="Views\Servis1\Edit.cshtml" />
+    <Content Include="Views\Servis1\Index.cshtml" />
+    <Content Include="Views\Vozilas\Create.cshtml" />
+    <Content Include="Views\Vozilas\Delete.cshtml" />
+    <Content Include="Views\Vozilas\Details.cshtml" />
+    <Content Include="Views\Vozilas\Edit.cshtml" />
+    <Content Include="Views\Vozilas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
